@@ -1,0 +1,13 @@
+pret - Disassembly
+SBird - Dynamic multichoice
+Ghoulslash - Better reflections
+LOuroboros - MANY QoL features + dynamic palettes
+redsquidz - Repel reuse
+Zeturic - Move item code
+ellabrella - Text speed
+SatoMew - HP drain
+Jirachii, Lunos, Sapphire Jester - Hidden Power correct display
+GriffinR, AsparagusEduardo, lightbox87 - Money white out calc
+Lunos - Misc stuff
+devolov - Fishing improvements
+FieryMewtwo, ipatix - Improved sound mixer

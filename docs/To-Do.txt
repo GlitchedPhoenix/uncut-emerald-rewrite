@@ -1,0 +1,1 @@
+- Test the money loss formulas more thoroughly. Speicifically with fewer badges.
