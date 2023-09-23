@@ -305,6 +305,7 @@ void FreeSpriteTilesByTag(u16 tag);
 void FreeSpriteTileRanges(void);
 u16 GetSpriteTileStartByTag(u16 tag);
 u16 GetSpriteTileTagByTileStart(u16 start);
+u8 LoadSpritePaletteDouble(const struct SpritePalette *palette);
 void RequestSpriteSheetCopy(const struct SpriteSheet *sheet);
 u16 LoadSpriteSheetDeferred(const struct SpriteSheet *sheet);
 void FreeAllSpritePalettes(void);

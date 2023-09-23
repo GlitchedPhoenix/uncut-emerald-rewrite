@@ -84,6 +84,14 @@ extern const u8 gText_SoSo[];
 extern const u8 gText_Bad[];
 extern const u8 gText_TheWorst[];
 
+// frlg_tm_case_port
+extern const u8 gText_TMCase[];
+extern const u8 gText_Close[];
+extern const u8 gText_TMCaseWillBePutAway[];
+extern const u8 gText_FontSmall[];
+extern const u8 gText_FontShort[];
+extern const u8 gText_TMCase_Blue[];
+
 extern const u8 Roulette_Text_ControlsInstruction[];
 extern const u8 Roulette_Text_KeepPlaying[];
 extern const u8 Roulette_Text_Jackpot[];

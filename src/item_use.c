@@ -18,6 +18,7 @@
 #include "field_screen_effect.h"
 #include "field_weather.h"
 #include "item.h"
+#include "tm_case.h"
 #include "item_menu.h"
 #include "item_use.h"
 #include "mail.h"
@@ -812,6 +813,41 @@ static void UseTMHM(u8 taskId)
 {
     gItemUseCB = ItemUseCB_TMHM;
     SetUpItemUseCallback(taskId);
+}
+
+static void CB2_OpenTMCaseOnField(void)
+{
+    InitTMCase(0, CB2_BagMenuFromStartMenu, 0);
+}
+
+static void Task_InitTMCaseFromField(u8 taskId)
+{
+    if (!gPaletteFade.active)
+    {
+        CleanupOverworldWindowsAndTilemaps();
+        // sub_80A1184();
+        InitTMCase(0, CB2_ReturnToField, 1);
+        DestroyTask(taskId);
+    }
+}
+
+void ItemUseOutOfBattle_TmCase(u8 taskId)
+{
+    if (MenuHelpers_IsLinkActive() == TRUE) // link func
+    {
+        DisplayDadsAdviceCannotUseItemMessage(taskId, gTasks[taskId].tUsingRegisteredKeyItem);
+    }
+    else if (gTasks[taskId].tUsingRegisteredKeyItem != TRUE)
+    {
+        gBagMenu->newScreenCallback = CB2_OpenTMCaseOnField;
+        Task_FadeAndCloseBagMenu(taskId);
+    }
+    else
+    {
+        gFieldCallback = FieldCB_ReturnToFieldNoScript; //FieldCB_ReturnToFieldNoScript
+        FadeScreen(FADE_TO_BLACK, 0);
+        gTasks[taskId].func = Task_InitTMCaseFromField;
+    }
 }
 
 static void RemoveUsedItem(void)
