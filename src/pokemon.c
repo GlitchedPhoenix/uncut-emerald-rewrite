@@ -6195,59 +6195,39 @@ bool8 TryIncrementMonLevel(struct Pokemon *mon)
 u32 CanMonLearnTMHM(struct Pokemon *mon, u8 tm)
 {
     u16 species = GetMonData(mon, MON_DATA_SPECIES_OR_EGG, 0);
+	const u8 *learnableMoves;
     if (species == SPECIES_EGG)
     {
         return 0;
     }
 
     // Fewer than 64 moves, use GF's method (for matching).
-    if (sizeof(struct TMHMLearnset) <= 8)
+    learnableMoves = gTMHMLearnsets[species];
+    while (*learnableMoves != 0xFF)
     {
-        if (tm < 32)
-        {
-            u32 mask = 1 << tm;
-            return gTMHMLearnsets[species].as_u32s[0] & mask;
-        }
-        else
-        {
-            u32 mask = 1 << (tm - 32);
-            return gTMHMLearnsets[species].as_u32s[1] & mask;
-        }
+		if (*learnableMoves == tm)
+            return TRUE;
+        learnableMoves++;
     }
-    else
-    {
-        u32 index = tm / 32;
-        u32 mask = 1 << (tm % 32);
-        return gTMHMLearnsets[species].as_u32s[index] & mask;
-    }
+	return FALSE;
 }
 
 u32 CanSpeciesLearnTMHM(u16 species, u8 tm)
 {
+	const u8 *learnableMoves;
     if (species == SPECIES_EGG)
     {
         return 0;
     }
     // Fewer than 64 moves, use GF's method (for matching).
-    if (sizeof(struct TMHMLearnset) <= 8)
+	learnableMoves = gTMHMLearnsets[species];
+    while (*learnableMoves != 0xFF)
     {
-        if (tm < 32)
-        {
-            u32 mask = 1 << tm;
-            return gTMHMLearnsets[species].as_u32s[0] & mask;
-        }
-        else
-        {
-            u32 mask = 1 << (tm - 32);
-            return gTMHMLearnsets[species].as_u32s[1] & mask;
-        }
+		if (*learnableMoves == tm)
+            return TRUE;
+        learnableMoves++;
     }
-    else
-    {
-        u32 index = tm / 32;
-        u32 mask = 1 << (tm % 32);
-        return gTMHMLearnsets[species].as_u32s[index] & mask;
-    }
+	return FALSE;
 }
 
 u8 GetMoveRelearnerMoves(struct Pokemon *mon, u16 *moves)
